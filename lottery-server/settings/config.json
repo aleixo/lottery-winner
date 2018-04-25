@@ -1,0 +1,16 @@
+{
+  "postgresql": {
+    "host": "ec2-54-75-244-248.eu-west-1.compute.amazonaws.com",
+    "user": "bnawhkudhokvkh",
+    "database": "de2vnc6b8p892n",
+    "password": "25db953ada3d3ddae54735f06c2de78fb9877c4cabd29e0d5777bf3e9cae69ac",
+    "port": 5432,
+    "ssl": true,
+    "max": 20,
+    "idleTimeoutMillis": 30000,
+    "connectionTimeoutMillis": 20000
+  },  
+  "app" : {
+    "port" : 3000
+  } 
+}
