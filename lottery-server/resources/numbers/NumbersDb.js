@@ -39,14 +39,15 @@ module.exports = class NumbersController extends Worker {
     }    
 
     /**
-     * TGis function calls database to get the next winning probability
+     * This function calls database to get the next winning probability
      * 
      * @returns {Promise} The resutned database promise
      */
-    getProbability() {
-        const query = '';
-        const params = [];
-        return this.query(query, params);
+    getNextProbability(game) {
+        console.log('SEARCH GAME -> ', game );
+        const query = 'SELECT next_num_win_probability FROM statistics WHERE game = $1';
+        const params = [ game ];
+        return this.query( query, params );
     }
 
     /**

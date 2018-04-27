@@ -8,7 +8,8 @@ module.exports = class HttpError {
     }
 
     get internalServerError() {
-        return (err, req, res, next) => {                    
+        return (err, req, res, next) => {    
+            console.log(err)                
             res.status(err.status || 500).send({ cause: err.message });            
         }
     }

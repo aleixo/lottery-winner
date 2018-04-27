@@ -21,7 +21,7 @@ module.exports = class NumbersRouter extends Worker {
         this.registerRoute({            
             method: Worker.VERBS.get,
             controllerAction: this.workerController.getNextNumber,
-        });    
+        });
 
         this.registerRoute({            
             method: Worker.VERBS.post,
@@ -29,9 +29,9 @@ module.exports = class NumbersRouter extends Worker {
         });    
         
         this.registerRoute({
-            path: '/probability',
+            path: '/:game/probability',
             method: Worker.VERBS.get,
-            controllerAction: this.workerController.getProbability,
+            controllerAction: this.workerController.getNextProbability,
         });    
     }       
 }

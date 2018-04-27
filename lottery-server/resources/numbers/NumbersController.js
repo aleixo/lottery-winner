@@ -18,27 +18,17 @@ module.exports = class NumbersController {
      */
     getNextNumber() {      
         const numbers = this.utils.generateNextNumber();
-        return this.areNumbersAvailable(numbers)   
+        return this.db.areNumbersAvailable(numbers)   
             .then( res => res ? numbers : this.utils.getNextNumber() );
             
-    }
-
-    /**
-     * Checks if a given ser of numbers are available callind db layer
-     * 
-     * @param {Object} numbers - The numbers to be checked.
-     * @returns {Promise} Resolution with true or false or rejection with error.
-     */
-    areNumbersAvailable(numbers) {
-        return this.db.areNumbersAvailable(numbers);
     }
 
     /**
      * Asks the db for the next winning probability.
      * 
      */
-    getProbability() {
-        
+    getNextProbability(data) {
+        return this.db.getNextProbability(data.game);
     }
 
     /**
