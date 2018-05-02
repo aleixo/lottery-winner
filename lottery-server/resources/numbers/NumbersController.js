@@ -1,6 +1,6 @@
 const Db = require('./NumbersDb');
 const Utils = require('./NumbersUtils');
-
+const Mongo = require('./NumbersMongo');
 module.exports = class NumbersController {
 
     /**
@@ -9,6 +9,15 @@ module.exports = class NumbersController {
     constructor() {
         this.db = new Db();
         this.utils = new Utils();
+        this.mongo = new Mongo();
+    }
+
+    restartNumbers() {
+        return this.mongo.restartNumbers()
+            .then( () => this.mongo.restartStatistics())
+            .then( () => {
+                return {message : 'RESTART IS STILL RUNNING. GOT TIME?'};
+            })            
     }
 
     /**
@@ -16,11 +25,14 @@ module.exports = class NumbersController {
      *
      * @returns {Object} - The available numbers or recursively calls itself in search for more.
      */
-    getNextNumber() {      
-        const numbers = this.utils.generateNextNumber();
-        return this.db.areNumbersAvailable(numbers)   
-            .then( res => res ? numbers : this.utils.getNextNumber() );
-            
+    getNextNumber() {       
+        return this.mongo.getNextNumber()
+            .then( result => {
+                return {
+                    message : 'GOT NUMBER',
+                    number : result,             
+                }
+            });                    
     }
 
     /**
@@ -28,7 +40,7 @@ module.exports = class NumbersController {
      * 
      */
     getNextProbability(data) {
-        return this.db.getNextProbability(data.game);
+        return this.mongo.getNextProbability(data.game);
     }
 
     /**
@@ -37,13 +49,10 @@ module.exports = class NumbersController {
      * @param {Object} numbers - The numbers to be checked.
      * @returns {Promise} Returned promise from db
      */
-    insertNumber(numbers) {
-        return this.db.areNumbersAvailable(numbers)
-        .then( res => {
-            if (!res) {
-                throw new Error('Ooops... Number already exists in Db.')
-            }
-            return this.db.insertNumber(numbers)
-        } );
+    deleteNumber(data) {
+       return this.mongo.deleteNumber(data.number)
+            .then( result => {
+                return {message : result ? 'Deleted' : 'Nothing to delete'};
+            })
     }    
 }

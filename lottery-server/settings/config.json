@@ -9,8 +9,22 @@
     "max": 20,
     "idleTimeoutMillis": 30000,
     "connectionTimeoutMillis": 20000
-  },  
+  },
+  "mongo": {
+    "username": "diogo_aleixo",
+    "pass": "dmaaac3",
+    "host": "ds261969.mlab.com",
+    "port": "61969",
+    "database":"heroku_21f9wz06",
+    "batchSize": 100000
+  },
   "app" : {
     "port" : 3000
+  },
+  "euro_millions" : {
+    "minN": 1,
+    "maxN": 5,
+    "minS": 1,
+    "maxS": 11 
   } 
 }

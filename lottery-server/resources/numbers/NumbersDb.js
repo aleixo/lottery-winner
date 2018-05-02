@@ -43,9 +43,8 @@ module.exports = class NumbersController extends Worker {
      * 
      * @returns {Promise} The resutned database promise
      */
-    getNextProbability(game) {
-        console.log('SEARCH GAME -> ', game );
-        const query = 'SELECT next_num_win_probability FROM statistics WHERE game = $1';
+    getNextProbability(game) {        
+        const query = 'SELECT win_probability, inserted_numbers_percentage FROM statistics WHERE game = $1';
         const params = [ game ];
         return this.query( query, params );
     }
