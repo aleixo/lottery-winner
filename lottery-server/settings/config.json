@@ -19,7 +19,7 @@
     "batchSize": 100000
   },
   "app" : {
-    "port" : 3000
+    "port" : 3001
   },
   "euro_millions" : {
     "minN": 1,
